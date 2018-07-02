@@ -1,6 +1,0 @@
-{
-    "python.pythonPath": "/home/tron/.virtualenvs/mysite/bin/python",
-    "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
-    "python.linting.pep8Enabled": true
-}
