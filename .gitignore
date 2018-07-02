@@ -103,5 +103,11 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+# vscode
+.vscode/
+
+# .idea
+.idea/
+
 # dev settings
 dev_settings
