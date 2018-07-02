@@ -19,7 +19,7 @@ class Article(models.Model):
     desc = models.CharField(max_length=100, blank=True, verbose_name='描述')
     context = models.TextField(verbose_name='内容')
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
-    view = models.IntegerField(verbose_name='查看次数')
+    view = models.IntegerField(default=0, verbose_name='查看次数')
     category = models.ForeignKey(Category, related_name='articles', on_delete=models.SET_NULL, null=True)
 
     class Meta:

@@ -9,6 +9,13 @@ class ArticleSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ArticleCreateSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Article
+        exclude = ('id', 'created_time', 'view')
+
+
 class CategorySerializer(serializers.ModelSerializer):
     articles = ArticleSerializer(many=True)
 
