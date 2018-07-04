@@ -3,8 +3,8 @@
     <b-card header="分类">
 <b-list-group>
   <b-list-group-item v-for="cat in categories" :key="cat.id">
-      <a href="#">{{ cat.name }}</a>
-      </b-list-group-item>
+    <router-link :to="'/category/'+cat.id">{{cat.name}}</router-link>
+  </b-list-group-item>
 </b-list-group>
     </b-card>
     <br>

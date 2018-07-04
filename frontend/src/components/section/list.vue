@@ -21,15 +21,30 @@ import { getlist } from '@/api/api'
 export default {
   data () {
     return {
-      list: []
+      list: [],
+      cat_id: ''
     }
   },
   created () {
-    getlist(
-    ).then((response) => {
-      console.log(response.data)
-      this.list = response.data
-    })
+    this.getList()
+  },
+  methods: {
+    getList () {
+      if (this.$route.params.id) {
+        this.cat_id = this.$route.params.id
+        getlist(
+        ).then((response) => {
+          console.log(this.$route.params.id)
+          this.list = response.data
+        })
+      } else {
+        getlist(
+        ).then((response) => {
+          console.log(response.data)
+          this.list = response.data
+        })
+      }
+    }
   }
 }
 </script>

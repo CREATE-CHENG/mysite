@@ -31,6 +31,13 @@ export default new Router({
           meta: {
             title: 'article'
           }
+        },
+        {
+          path: 'category/:id',
+          name: 'category',
+          components: {
+            'section': list
+          }
         }
       ]
     }
