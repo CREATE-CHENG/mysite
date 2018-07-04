@@ -9,4 +9,5 @@ export default {
 </script>
 <style>
 body {background-color:	#F0F0F0}
+a {color: #000;}
 </style>

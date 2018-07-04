@@ -17,6 +17,13 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 
 
 class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+
+class CategoryWithArticlesSerializer(serializers.ModelSerializer):
     articles = ArticleSerializer(many=True)
 
     class Meta:

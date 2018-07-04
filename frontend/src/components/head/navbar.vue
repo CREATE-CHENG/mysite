@@ -12,7 +12,6 @@
       <b-nav-item href="#">分类</b-nav-item>
       <b-nav-item href="#">归档</b-nav-item>
     </b-navbar-nav>
-
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
 
@@ -26,5 +25,4 @@
   </b-collapse>
   </b-container>
 </b-navbar>
-
 </template>

@@ -4,7 +4,7 @@ from rest_framework.permissions import IsAdminUser
 from rest_framework.authentication import SessionAuthentication
 from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 from rest_framework.response import Response
-from .serializers import ArticleSerializer, CategorySerializer
+from .serializers import ArticleSerializer, CategorySerializer, CategoryWithArticlesSerializer
 from .models import Article, Category
 
 
@@ -38,3 +38,8 @@ class CategoryViewSet(ListModelMixin, CreateModelMixin, RetrieveModelMixin, Gene
         else:
             return []
 
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return CategoryWithArticlesSerializer
+        else:
+            return CategorySerializer
