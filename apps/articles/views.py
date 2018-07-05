@@ -1,4 +1,7 @@
-from django.db.models import Count, Sum, Q
+from operator import itemgetter
+from itertools import groupby
+
+from django.db.models import Count
 
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
@@ -57,4 +60,11 @@ class CategoryWithArticleViewSet(ListModelMixin, GenericViewSet):
 
 
 class ArchiveViewSet(ListModelMixin, GenericViewSet):
-    pass
+    serializer_class = ArticleArchiveSerializer
+
+    def list(self, request, *args, **kwargs):
+        queryset = Article.objects.all()
+        serializer = self.get_serializer(queryset, many=True)
+        lstg = groupby(serializer.data, itemgetter('created_time'))
+        data = dict([(key, list(group)) for key, group in lstg])
+        return Response(data)
