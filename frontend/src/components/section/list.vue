@@ -1,6 +1,7 @@
 <template>
   <b-col cols="8">
-    <b-card v-for="article in list" :header="article.title" :sub-title="article.context" :key="article.id">
+    <template v-for="article in list">
+    <b-card :header="article.title" :sub-title="article.context" :key="article.id">
         <p class="card-text">
             Some quick example text to build on the <em>card title</em> and make up the bulk of the card's content.
         </p>
@@ -9,8 +10,9 @@
         <b-link href="#"
                 class="card-link">Another link</b-link>
     </b-card>
-    <br>
-    <b-pagination size="md" align="right" :total-rows="100" v-model="currentPage" :per-page="10">
+    <br :key="article.id">
+    </template>
+    <b-pagination size="md" align="right" :total-rows="totalrows" v-model="currentPage" :per-page="5">
     </b-pagination>
 </b-col>
 </template>
@@ -22,26 +24,37 @@ export default {
   data () {
     return {
       list: [],
-      cat_id: ''
+      currentPage: 1,
+      totalrows: ''
     }
   },
-  created () {
+  mounted () {
     this.getList()
+  },
+  watch: {
+    '$route': function () {
+      this.currentPage = 1
+      this.getList()
+    },
+    'currentPage': 'getList'
   },
   methods: {
     getList () {
       if (this.$route.params.id) {
-        this.cat_id = this.$route.params.id
-        getlist(
-        ).then((response) => {
-          console.log(this.$route.params.id)
-          this.list = response.data
+        getlist({
+          page: this.currentPage,
+          category__id: this.$route.params.id
+        }).then((response) => {
+          this.list = response.data.results
+          this.totalrows = response.data.count
         })
       } else {
-        getlist(
+        getlist({
+          page: this.currentPage
+        }
         ).then((response) => {
-          console.log(response.data)
-          this.list = response.data
+          this.list = response.data.results
+          this.totalrows = response.data.count
         })
       }
     }
