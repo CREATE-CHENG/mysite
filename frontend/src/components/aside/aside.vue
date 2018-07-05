@@ -2,8 +2,9 @@
   <b-col cols="4">
     <b-card header="分类">
 <b-list-group>
-  <b-list-group-item v-for="cat in categories" :key="cat.id">
+  <b-list-group-item v-for="cat in categories" :key="cat.id" class="d-flex justify-content-between align-items-center">
     <router-link :to="'/category/'+cat.id">{{cat.name}}</router-link>
+    <b-badge variant="dark" pill>{{cat.count}}</b-badge>
   </b-list-group-item>
 </b-list-group>
     </b-card>

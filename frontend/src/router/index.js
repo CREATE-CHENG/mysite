@@ -23,7 +23,7 @@ export default new Router({
           }
         },
         {
-          path: 'article/',
+          path: 'article/:id',
           name: 'detail',
           components: {
             'section': detail
@@ -33,11 +33,19 @@ export default new Router({
           }
         },
         {
-          path: 'category/:id',
+          path: 'category/',
           name: 'category',
           components: {
             'section': list
-          }
+          },
+          children: [
+            {
+              path: ':id',
+              components: {
+                'section': list
+              }
+            }
+          ]
         }
       ]
     }
