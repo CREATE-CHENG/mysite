@@ -65,6 +65,6 @@ class ArchiveViewSet(ListModelMixin, GenericViewSet):
     def list(self, request, *args, **kwargs):
         queryset = Article.objects.all()
         serializer = self.get_serializer(queryset, many=True)
-        lstg = groupby(serializer.data, itemgetter('created_time'))
-        data = dict([(key, list(group)) for key, group in lstg])
-        return Response(data)
+        data = groupby(serializer.data, itemgetter('created_time'))
+        archive_data = dict([(key, list(group)) for key, group in data])
+        return Response(archive_data)
