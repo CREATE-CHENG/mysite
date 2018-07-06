@@ -1,8 +1,21 @@
 from rest_framework import serializers
 from .models import Article, Category
+from comments.serializers import CommentSerializer
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+    def get_count(self, obj):
+        return obj.articles.count()
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
 
     class Meta:
         model = Article
@@ -16,20 +29,21 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
         exclude = ('id', 'created_time', 'view')
 
 
+class ArticleRetrieveSerializer(serializers.ModelSerializer):
+    comments = CommentSerializer(many=True)
+    created_time = serializers.DateTimeField(format='%Y-%m-%d: %H:%M')
+
+    class Meta:
+        model = Article
+        fields = '__all__'
+
+
 class ArticleArchiveSerializer(serializers.ModelSerializer):
     created_time = serializers.DateTimeField(format='%Y-%m')
 
     class Meta:
         model = Article
-        fields = ('id', 'created_time', 'view', 'title')
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    count = serializers.IntegerField()
-
-    class Meta:
-        model = Category
-        fields = ('id', 'name', 'count')
+        fields = '__all__'
 
 
 class CategoryWithArticleSerializer(serializers.ModelSerializer):
@@ -38,4 +52,3 @@ class CategoryWithArticleSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = '__all__'
-

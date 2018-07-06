@@ -18,11 +18,12 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
-from articles.views import ArticleViewSet, CategoryViewSet
+from articles.views import ArticleViewSet, CategoryViewSet, ArchiveViewSet
 
 router = DefaultRouter()
 router.register(r'articles', ArticleViewSet, base_name='articles')
 router.register(r'categories', CategoryViewSet, base_name='categories')
+router.register(r'archive', ArchiveViewSet, base_name='archive')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

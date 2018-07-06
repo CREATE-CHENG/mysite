@@ -3,7 +3,6 @@ from .models import Comment
 
 
 class ChildrenCommentSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
 
     class Meta:
         model = Comment
@@ -11,9 +10,16 @@ class ChildrenCommentSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
-    children = ChildrenCommentSerializer()
+    children = ChildrenCommentSerializer(many=True)
 
     class Meta:
         model = Comment
         fields = '__all__'
+
+
+class CommentCreateSerializer(serializers.ModelSerializer):
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
+
+    class Meta:
+        model = Comment
+        exclude = ('id', 'created_time')

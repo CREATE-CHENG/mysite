@@ -1,8 +1,6 @@
 from operator import itemgetter
 from itertools import groupby
 
-from django.db.models import Count
-
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
 from rest_framework.permissions import IsAdminUser
@@ -11,7 +9,7 @@ from rest_framework.response import Response
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import ArticleSerializer, CategorySerializer, CategoryWithArticleSerializer, ArticleArchiveSerializer
+from .serializers import ArticleSerializer, CategorySerializer, CategoryWithArticleSerializer, ArticleArchiveSerializer, ArticleRetrieveSerializer
 from .models import Article, Category
 
 
@@ -35,6 +33,12 @@ class ArticleViewSet(ModelViewSet):
         else:
             return [IsAdminUser()]
 
+    def get_serializer_class(self):
+        if self.action == 'retrieve':
+            return ArticleRetrieveSerializer
+        else:
+            return ArticleSerializer
+
     def retrieve(self, request, *args, **kwargs):
         instance = self.get_object()
         instance.view += 1
@@ -45,7 +49,7 @@ class ArticleViewSet(ModelViewSet):
 
 class CategoryViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
     serializer_class = CategorySerializer
-    queryset = Category.objects.annotate(count=Count('articles'))
+    queryset = Category.objects.all()
 
     def get_permissions(self):
         if self.action == 'create':
