@@ -7,8 +7,6 @@
         </p>
         <a href="#"
            class="card-link">Card link</a>
-        <b-link href="#"
-                class="card-link">Another link</b-link>
     </b-card>
     <br :key="article.id">
     </template>
@@ -28,7 +26,7 @@ export default {
       totalrows: ''
     }
   },
-  mounted () {
+  created () {
     this.getList()
   },
   watch: {

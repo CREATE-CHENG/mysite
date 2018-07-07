@@ -3,10 +3,12 @@ import Router from 'vue-router'
 import index from '@/views/index'
 import list from '@/components/section/list'
 import detail from '@/components/section/detail'
+import archive from '@/components/section/archive'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: '/',
@@ -46,6 +48,13 @@ export default new Router({
               }
             }
           ]
+        },
+        {
+          path: 'archive',
+          name: 'archive',
+          components: {
+            'section': archive
+          }
         }
       ]
     }

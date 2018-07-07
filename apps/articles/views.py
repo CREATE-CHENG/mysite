@@ -9,7 +9,11 @@ from rest_framework.response import Response
 
 from django_filters.rest_framework import DjangoFilterBackend
 
-from .serializers import ArticleSerializer, CategorySerializer, CategoryWithArticleSerializer, ArticleArchiveSerializer, ArticleRetrieveSerializer
+from .serializers import (
+    ArticleSerializer, CategorySerializer, CategoryWithArticleSerializer,
+    ArticleArchiveSerializer, ArticleRetrieveSerializer
+)
+
 from .models import Article, Category
 
 
@@ -34,7 +38,7 @@ class ArticleViewSet(ModelViewSet):
             return [IsAdminUser()]
 
     def get_serializer_class(self):
-        if self.action == 'retrieve':
+        if self.action in ['retrieve', 'update']:
             return ArticleRetrieveSerializer
         else:
             return ArticleSerializer
@@ -44,6 +48,21 @@ class ArticleViewSet(ModelViewSet):
         instance.view += 1
         instance.save()
         serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+        response = Response(serializer.data)
+
+        if getattr(instance, '_prefetched_objects_cache', None):
+            # If 'prefetch_related' has been applied to a queryset, we need to
+            # forcibly invalidate the prefetch cache on the instance.
+            instance._prefetched_objects_cache = {}
+
         return Response(serializer.data)
 
 

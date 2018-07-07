@@ -19,6 +19,7 @@ from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from articles.views import ArticleViewSet, CategoryViewSet, ArchiveViewSet
+from users.views import SocialToJwtView
 
 router = DefaultRouter()
 router.register(r'articles', ArticleViewSet, base_name='articles')
@@ -30,6 +31,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('jwt_auth/', obtain_jwt_token),
+    path('social_to_jwt/', SocialToJwtView.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('index/', TemplateView.as_view(template_name='index.html'), name='index')
 ]

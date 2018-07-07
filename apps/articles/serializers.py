@@ -3,19 +3,7 @@ from .models import Article, Category
 from comments.serializers import CommentSerializer
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    count = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Category
-        fields = '__all__'
-
-    def get_count(self, obj):
-        return obj.articles.count()
-
-
 class ArticleSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
 
     class Meta:
         model = Article
@@ -44,6 +32,17 @@ class ArticleArchiveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = '__all__'
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    count = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+    def get_count(self, obj):
+        return obj.articles.count()
 
 
 class CategoryWithArticleSerializer(serializers.ModelSerializer):
