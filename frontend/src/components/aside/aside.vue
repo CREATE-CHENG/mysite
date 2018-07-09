@@ -4,13 +4,13 @@
 <b-list-group>
   <b-list-group-item v-for="cat in categories" :key="cat.id" class="d-flex justify-content-between align-items-center">
     <router-link :to="'/category/'+cat.id">{{cat.name}}</router-link>
-    <b-badge variant="dark" pill>{{cat.count}}</b-badge>
+    <b-badge variant="dark" pill>{{cat.articles.length}}</b-badge>
   </b-list-group-item>
 </b-list-group>
     </b-card>
     <br>
-    <b-card header="Card title"
-            sub-title="Card subtitle">
+    <b-card header="吾"
+            sub-title="何人也">
         <p class="card-text">
             Some quick example text to build on the <em>card title</em> and make up the bulk of the card's content.
         </p>

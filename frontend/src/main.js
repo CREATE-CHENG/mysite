@@ -6,9 +6,19 @@ import App from './App'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import VueTimeago from 'vue-timeago'
 
 Vue.use(BootstrapVue)
+
 Vue.config.productionTip = false
+
+Vue.use(VueTimeago, {
+  name: 'Timeago', // Component name, `Timeago` by default
+  locale: undefined, // Default locale
+  locales: {
+    'zh-CN': require('date-fns/locale/zh_cn')
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({

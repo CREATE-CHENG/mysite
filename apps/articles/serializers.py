@@ -4,6 +4,8 @@ from comments.serializers import CommentSerializer
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M')
+    comments = serializers.PrimaryKeyRelatedField(many=True, read_only=True)
 
     class Meta:
         model = Article
@@ -19,7 +21,7 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 
 class ArticleRetrieveSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
-    created_time = serializers.DateTimeField(format='%Y-%m-%d: %H:%M')
+    created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M')
 
     class Meta:
         model = Article
@@ -34,15 +36,19 @@ class ArticleArchiveSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ArticleForCategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title')
+
+
 class CategorySerializer(serializers.ModelSerializer):
-    count = serializers.SerializerMethodField()
+    articles = ArticleForCategorySerializer(many=True)
 
     class Meta:
         model = Category
         fields = '__all__'
-
-    def get_count(self, obj):
-        return obj.articles.count()
 
 
 class CategoryWithArticleSerializer(serializers.ModelSerializer):

@@ -1,12 +1,13 @@
 <template>
   <b-col cols="8">
     <template v-for="article in list">
-    <b-card :header="article.title" :sub-title="article.context" :key="article.id">
-        <p class="card-text">
-            Some quick example text to build on the <em>card title</em> and make up the bulk of the card's content.
-        </p>
-        <a href="#"
-           class="card-link">Card link</a>
+    <b-card :key="article.id">
+      <b>{{ article.title }}</b>
+      <hr>
+      <p class="card-text">{{ article.content }}</p>
+      <router-link :to="{name:'detail', params: { id: article.id }}">阅读全文</router-link>
+      <hr>
+      <timeago :since="article.created_time" locale="zh-CN" class="text-right text-muted"></timeago>
     </b-card>
     <br :key="article.id">
     </template>
@@ -27,17 +28,17 @@ export default {
     }
   },
   created () {
-    this.getList()
+    this.get_list()
   },
   watch: {
     '$route': function () {
       this.currentPage = 1
-      this.getList()
+      this.get_list()
     },
     'currentPage': 'getList'
   },
   methods: {
-    getList () {
+    get_list () {
       if (this.$route.params.id) {
         getlist({
           page: this.currentPage,

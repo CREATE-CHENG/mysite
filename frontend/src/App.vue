@@ -8,6 +8,12 @@ export default {
 }
 </script>
 <style>
-body {background-color:	#F0F0F0}
-a {color: #000;}
+body {background-image: url(assets/background.jpg);
+ background-size:100% 100%;
+ background-color: #e3e3e3;
+ background-repeat:no-repeat;
+ background-position:bottom right;
+ background-attachment:fixed;
+}
+a {color: #cccccc;}
 </style>
