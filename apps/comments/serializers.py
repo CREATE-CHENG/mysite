@@ -1,8 +1,10 @@
 from rest_framework import serializers
 from .models import Comment
+from users.serializers import UserSerializer
 
 
 class ChildrenCommentSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
 
     class Meta:
         model = Comment
@@ -10,7 +12,8 @@ class ChildrenCommentSerializer(serializers.ModelSerializer):
 
 
 class CommentSerializer(serializers.ModelSerializer):
-    children = ChildrenCommentSerializer(many=True)
+    children = ChildrenCommentSerializer(many=True, read_only=True)
+    user = UserSerializer()
 
     class Meta:
         model = Comment

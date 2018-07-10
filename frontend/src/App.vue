@@ -8,9 +8,9 @@ export default {
 }
 </script>
 <style>
-body {background-image: url(assets/background.jpg);
+body {background-image: url(assets/background1.jpg);
  background-size:100% 100%;
- background-color: #e3e3e3;
+ background-color: #f4f4f2;
  background-repeat:no-repeat;
  background-position:bottom right;
  background-attachment:fixed;

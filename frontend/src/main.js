@@ -11,6 +11,7 @@ import VueTimeago from 'vue-timeago'
 Vue.use(BootstrapVue)
 
 Vue.config.productionTip = false
+Vue.config.devtools = true
 
 Vue.use(VueTimeago, {
   name: 'Timeago', // Component name, `Timeago` by default
