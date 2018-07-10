@@ -2,7 +2,7 @@
   <b-col cols="8">
 <b-card :header="article.title" :header-tag="header">
             <p class="card-text">{{ article.content }}</p>
-            <p class="card-text">{{ article.created_time }}</p>
+            <p class="card-text text-muted">{{ article.created_time }}</p>
         </b-card>
         <br>
         <comment :comments="article.comments"></comment>

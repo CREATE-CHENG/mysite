@@ -7,7 +7,7 @@
       <p class="card-text">{{ article.content }}</p>
       <router-link :to="{name:'detail', params: { id: article.id }}">阅读全文</router-link>
       <hr>
-      <timeago :since="article.created_time" locale="zh-CN" class="text-right text-muted"></timeago>
+      <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
     </b-card>
     <br :key="article.id">
     </template>
@@ -35,7 +35,7 @@ export default {
       this.currentPage = 1
       this.get_list()
     },
-    'currentPage': 'getList'
+    'currentPage': 'get_list'
   },
   methods: {
     get_list () {

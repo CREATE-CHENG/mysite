@@ -20,7 +20,7 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 
 
 class ArticleRetrieveSerializer(serializers.ModelSerializer):
-    comments = CommentSerializer(many=True)
+    comments = CommentSerializer(many=True, read_only=True)
     created_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M')
 
     class Meta:

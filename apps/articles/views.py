@@ -1,5 +1,6 @@
 from operator import itemgetter
 from itertools import groupby
+import copy
 
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import ListModelMixin, CreateModelMixin
@@ -35,7 +36,7 @@ class ArticleViewSet(ModelViewSet):
             return [IsAdminUser()]
 
     def get_serializer_class(self):
-        if self.action in ['retrieve', 'update']:
+        if self.action == 'retrieve':
             return ArticleRetrieveSerializer
         elif self.action == 'create':
             return ArticleCreateSerializer
@@ -47,7 +48,9 @@ class ArticleViewSet(ModelViewSet):
         instance.view += 1
         instance.save()
         serializer = self.get_serializer(instance)
-        return Response(serializer.data)
+        serializer = serializer.data
+        serializer['comments'] = [comment for comment in serializer['comments'] if comment['parent'] is None]
+        return Response(serializer)
 
 
 class CategoryViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
