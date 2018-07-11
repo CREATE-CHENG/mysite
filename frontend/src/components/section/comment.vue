@@ -1,29 +1,22 @@
 <template>
  <b-card header="评论" header-tag="header">
    <template v-for="comment in comments">
-     <b-card v-if="!comment.parent">
+     <b-card>
        <b-media>
-         <b-img slot="aside" blank blank-color="#ccc" width="64" alt="placeholder" />
-         <h5 class="mt-0">Media Title</h5>
-         <p>
-           Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante
-           sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
-           Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis
-            faucibus.
-         </p>
-         <p>
-          Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo. Cum
-          sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-         </p>
+         <b-img slot="aside" width="50" alt="avatar" :src="comment.user.social_auth.extra_data.profile_image_url" />
+         <h6 class="mt-0">{{comment.user.social_auth.extra_data.username}}</h6>
+         <p>{{comment.content}}</p>
+         <p><timeago :since="comment.created_time" locale="zh-CN" class="text-muted"></timeago></p>
          <hr>
+         <template v-for="child in comment.children">
          <b-media>
-         <b-img slot="aside" blank blank-color="#ccc" width="64" alt="placeholder" />
-           <h5 class="mt-0">Nested Media</h5>
-           <p class="mb-0">
-             Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-             congue felis in faucibus.
-           </p>
+         <b-img slot="aside" width="50" alt="placeholder" :src="child.user.social_auth.extra_data.profile_image_url"/>
+           <h6 class="mt-0">{{child.user.social_auth.extra_data.username}}</h6>
+           <p>{{comment.content}}</p>
+           <p><timeago :since="child.created_time" locale="zh-CN" class="text-muted"></timeago></p>
          </b-media>
+         <hr>
+         </template>
        </b-media>
      </b-card>
      <br>

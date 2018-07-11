@@ -9,7 +9,7 @@
       <hr>
       <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
     </b-card>
-    <br :key="article.id">
+    <br>
     </template>
     <b-pagination size="md" align="right" :total-rows="totalrows" v-model="currentPage" :per-page="5">
     </b-pagination>
@@ -24,7 +24,7 @@ export default {
     return {
       list: [],
       currentPage: 1,
-      totalrows: ''
+      totalrows: null
     }
   },
   created () {
