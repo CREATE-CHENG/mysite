@@ -28,10 +28,10 @@ router.register(r'archive', ArchiveViewSet, base_name='archive')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
     path('jwt_auth/', obtain_jwt_token),
     path('social_to_jwt/', SocialToJwtView.as_view()),
     path('', include('social_django.urls', namespace='social')),
-    path('index/', TemplateView.as_view(template_name='index.html'), name='index')
+    path('', TemplateView.as_view(template_name='index.html'), name='index')
 ]

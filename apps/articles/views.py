@@ -1,6 +1,5 @@
 from operator import itemgetter
 from itertools import groupby
-import copy
 
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
 from rest_framework.mixins import ListModelMixin, CreateModelMixin

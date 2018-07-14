@@ -67,7 +67,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'frontend/dist')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -140,7 +140,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "frontend/dist/static"),
 )
 
 
@@ -154,6 +154,7 @@ REST_FRAMEWORK = {
 
 
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 
 SOCIAL_AUTH_WEIBO_KEY = os.environ.get('WEIBO_KEY')
@@ -163,7 +164,7 @@ SOCIAL_AUTH_WEIBO_DOMAIN_AS_USERNAME = True
 SOCIAL_AUTH_GITHUB_KEY = ''
 SOCIAL_AUTH_GITHUB_SECRET = ''
 
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/social_to_jwt/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
 
 
 JWT_AUTH = {

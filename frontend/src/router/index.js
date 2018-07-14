@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import index from '@/views/index'
-import login from '@/views/login'
 import list from '@/components/section/list'
 import detail from '@/components/section/detail'
 import archive from '@/components/section/archive'
@@ -36,19 +35,11 @@ export default new Router({
           }
         },
         {
-          path: 'category/',
+          path: 'category/:id',
           name: 'category',
           components: {
             'section': list
-          },
-          children: [
-            {
-              path: ':id',
-              components: {
-                'section': list
-              }
-            }
-          ]
+          }
         },
         {
           path: 'archive',
@@ -58,11 +49,6 @@ export default new Router({
           }
         }
       ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: login
     }
   ]
 })

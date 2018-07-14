@@ -27,7 +27,7 @@ export default {
       totalrows: null
     }
   },
-  created () {
+  mounted () {
     this.get_list()
   },
   watch: {

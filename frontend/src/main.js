@@ -7,11 +7,16 @@ import router from './router'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueTimeago from 'vue-timeago'
+import store from './store/store'
+import './axios/interceptors'
+import VueCookies from 'vue-cookies'
 
-Vue.use(BootstrapVue)
+Vue.use(VueCookies)
 
 Vue.config.productionTip = false
 Vue.config.devtools = true
+
+Vue.use(BootstrapVue)
 
 Vue.use(VueTimeago, {
   name: 'Timeago', // Component name, `Timeago` by default
@@ -25,6 +30,7 @@ Vue.use(VueTimeago, {
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })

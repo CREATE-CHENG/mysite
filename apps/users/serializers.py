@@ -11,8 +11,7 @@ class SocialUserSerializer(serializers.ModelSerializer):
         fields = ('extra_data',)
 
     def get_extra_data(self, cls):
-        return {'username': cls.first().extra_data['username'],
-                'profile_image_url': cls.first().extra_data['profile_image_url']}
+        return {'profile_image_url': cls.first().extra_data['profile_image_url']}
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -20,4 +19,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('social_auth',)
+        fields = ('social_auth', 'username')
