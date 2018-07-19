@@ -17,7 +17,7 @@
     </b-navbar-nav>
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
-      <b-nav-item-dropdown :text="this.$store.state.user.username" right v-if="this.$store.state.user.username">
+      <b-nav-item-dropdown :text="this.user.username" right v-if="this.user.username">
         <b-dropdown-item @click="logout">登出</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item href="http://127.0.0.1:8000/login/weibo/" v-else @click="set_redirect_url">登录</b-nav-item>
@@ -30,14 +30,21 @@
 
 <script>
 import { logout } from '../../api/api'
+import { mapGetters } from 'vuex'
 
 export default {
+  computed: {
+    ...mapGetters({
+      user: 'user'
+    })
+  },
   methods: {
     set_redirect_url () {
       sessionStorage.setItem('redirect_url', this.$route.path)
     },
     logout () {
       sessionStorage.clear()
+      this.$store.dispatch('setuser')
       this.set_redirect_url()
       this.$cookies.remove('csrftoken')
       logout()

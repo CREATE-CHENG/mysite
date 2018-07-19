@@ -1,6 +1,6 @@
 <template>
   <b-col cols="8">
-<b-card :header="article.title" :header-tag="header">
+<b-card :header="article.title">
             <p class="card-text">{{ article.content }}</p>
             <p class="card-text text-muted"><timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago></p>
         </b-card>

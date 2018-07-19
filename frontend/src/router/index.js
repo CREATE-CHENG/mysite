@@ -31,7 +31,7 @@ export default new Router({
             'section': detail
           },
           meta: {
-            title: 'article'
+            title: '文章'
           }
         },
         {
@@ -39,6 +39,9 @@ export default new Router({
           name: 'category',
           components: {
             'section': list
+          },
+          meta: {
+            title: '分类'
           }
         },
         {
@@ -46,6 +49,9 @@ export default new Router({
           name: 'archive',
           components: {
             'section': archive
+          },
+          meta: {
+            title: '归档'
           }
         }
       ]
