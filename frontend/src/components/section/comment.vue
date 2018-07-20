@@ -1,4 +1,5 @@
 <template>
+<div>
  <b-card header="评论" header-tag="header">
    <template v-for="comment in comments">
      <b-card>
@@ -21,10 +22,17 @@
      </b-card>
      <br>
    </template>
+   <editor></editor>
   </b-card>
+  </div>
 </template>
 <script>
+import editor from '@/components/section/editor'
+
 export default {
-  props: ['comments']
+  props: ['comments'],
+  components: {
+    'editor': editor
+  }
 }
 </script>

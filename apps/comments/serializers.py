@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Comment
+from .models import Comment, Image
 from users.serializers import UserSerializer
 
 
@@ -26,3 +26,11 @@ class CommentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         exclude = ('id', 'created_time')
+
+
+class ImageUploadSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField()
+
+    class Meta:
+        model = Image
+        fields = ('image',)

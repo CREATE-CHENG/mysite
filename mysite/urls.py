@@ -13,6 +13,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
@@ -20,11 +22,13 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from articles.views import ArticleViewSet, CategoryViewSet, ArchiveViewSet
 from users.views import SocialToJwtView
+from comments.views import ImageUploadViewSet
 
 router = DefaultRouter()
 router.register(r'articles', ArticleViewSet, base_name='articles')
 router.register(r'categories', CategoryViewSet, base_name='categories')
 router.register(r'archive', ArchiveViewSet, base_name='archive')
+router.register(r'image_upload', ImageUploadViewSet, base_name='image')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -34,4 +38,4 @@ urlpatterns = [
     path('social_to_jwt/', SocialToJwtView.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('', TemplateView.as_view(template_name='index.html'), name='index')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

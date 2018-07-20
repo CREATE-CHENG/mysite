@@ -141,6 +141,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "frontend/dist/static"),
 )
 
+MEDIA_ROOT = os.path.join(BASE_DIR, "image")
+MEDIA_URL = '/image/'
 
 REST_FRAMEWORK = {
     'DEFAULT_METADATA_CLASS': 'utils.metadata.MinimalMetadata',
