@@ -3,7 +3,7 @@
     <b-card header="分类">
 <b-list-group>
   <b-list-group-item v-for="cat in categories" :key="cat.id" class="d-flex justify-content-between align-items-center">
-    <router-link :to="'/category/'+cat.id">{{cat.name}}</router-link>
+    <router-link :to="'/category/'+cat.id" class="url">{{cat.name}}</router-link>
     <b-badge variant="dark" pill>{{cat.articles.length}}</b-badge>
   </b-list-group-item>
 </b-list-group>
@@ -34,5 +34,6 @@ export default {
   }
 }
 </script>
+
 
 

@@ -8,7 +8,8 @@ from .serializers import ImageUploadSerializer, CommentCreateSerializer
 
 # todo 提交评论的viewset。markdown渲染
 class CommentViewSet(CreateModelMixin, GenericViewSet):
-
+    # permission_classes = (permissions.IsAuthenticated,)
+    # authentication_classes = (JSONWebTokenAuthentication,)
     serializer_class = CommentCreateSerializer
 
 

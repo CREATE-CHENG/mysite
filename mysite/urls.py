@@ -22,13 +22,14 @@ from rest_framework.routers import DefaultRouter
 from rest_framework_jwt.views import obtain_jwt_token
 from articles.views import ArticleViewSet, CategoryViewSet, ArchiveViewSet
 from users.views import SocialToJwtView
-from comments.views import ImageUploadViewSet
+from comments.views import ImageUploadViewSet, CommentViewSet
 
 router = DefaultRouter()
 router.register(r'articles', ArticleViewSet, base_name='articles')
 router.register(r'categories', CategoryViewSet, base_name='categories')
 router.register(r'archive', ArchiveViewSet, base_name='archive')
 router.register(r'image_upload', ImageUploadViewSet, base_name='image')
+router.register(r'comments', CommentViewSet, base_name='comments')
 
 urlpatterns = [
     path('admin/', admin.site.urls),

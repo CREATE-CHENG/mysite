@@ -17,6 +17,7 @@
     "popper.js": "^1.12.9",
     "vue": "^2.5.2",
     "vue-cookies": "^1.5.6",
+    "vue-markdown": "^2.2.4",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {
