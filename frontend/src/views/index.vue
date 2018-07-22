@@ -58,3 +58,4 @@ export default {
 }
 
 </script>
+# todo 登录失效验证，getjwt返回的的error里处理该问题，以及其他错误处理

@@ -41,10 +41,8 @@ export default {
     logout () {
       sessionStorage.clear()
       this.$store.dispatch('setuser')
-      this.set_redirect_url()
       this.$cookies.remove('csrftoken')
       logout()
-      this.$router.push('/')
     }
   }
 }

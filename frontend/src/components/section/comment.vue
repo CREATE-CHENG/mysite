@@ -50,7 +50,7 @@ export default {
       value: '',
       placeholder: '请输入评论内容',
       pid: null,
-      editable: false
+      editable: true
     }
   },
   components: {
@@ -60,8 +60,10 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user'
-    }),
-    editable: this.set_editable()
+    })
+  },
+  created () {
+    this.editable = this.set_editable()
   },
   props: ['comments', 'article_id'],
   methods: {
@@ -77,19 +79,29 @@ export default {
         this.$refs.md.$img2Url(pos, response.data.image)
       })
     },
-    onSubmit () {
-      var formdata = new FormData()
-      var content = this.markdown(this.value)
-      formdata.append('content', content)
-      formdata.append('article', this.article_id)
-      if (this.pid) {
-        formdata.append('parent', this.pid)
+    onSubmit (evt) {
+      if (this.user.token) {
+        if (this.value) {
+          var formdata = new FormData()
+          var content = this.markdown(this.value)
+          formdata.append('content', content)
+          formdata.append('article', this.article_id)
+          if (this.pid) {
+            formdata.append('parent', this.pid)
+          }
+          addcomment(formdata)
+        } else {
+          evt.preventDefault()
+          alert('请输入评论内容')
+          this.$refs.md.textAreaFocus()
+        }
+      } else {
+        alert('请登录！')
       }
-      addcomment(formdata)
     },
     onReset () {
       this.value = ''
-      this.placeholder = '请输入评论内容'
+      this.placeholder = '请输入评论内容!'
       this.pid = null
     },
     reply (pid, username) {
@@ -109,6 +121,7 @@ export default {
       if (this.user.token) {
         return true
       } else {
+        this.placeholder = '看到也没用，登录后才能使用！'
         return false
       }
     }
