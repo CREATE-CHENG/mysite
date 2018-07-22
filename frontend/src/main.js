@@ -10,8 +10,10 @@ import VueTimeago from 'vue-timeago'
 import store from './store/store'
 import './axios/interceptors'
 import VueCookies from 'vue-cookies'
-import mavonEditor from 'mavon-editor'
-import 'mavon-editor/dist/css/index.css'
+// import mavonEditor from 'mavon-editor'
+// import 'mavon-editor/dist/css/index.css'
+// import 'github-markdown-css/github-markdown.css'
+import 'font-awesome/css/font-awesome.css'
 
 Vue.use(VueCookies)
 
@@ -20,7 +22,7 @@ Vue.config.devtools = true
 
 Vue.use(BootstrapVue)
 
-Vue.use(mavonEditor)
+// Vue.use(mavonEditor)
 
 Vue.use(VueTimeago, {
   name: 'Timeago', // Component name, `Timeago` by default
@@ -28,13 +30,6 @@ Vue.use(VueTimeago, {
   locales: {
     'zh-CN': require('date-fns/locale/zh_cn')
   }
-})
-
-router.beforeEach((to, from, next) => {
-  if (to.meta.title) {
-    document.title = to.meta.title
-  }
-  next()
 })
 
 /* eslint-disable no-new */

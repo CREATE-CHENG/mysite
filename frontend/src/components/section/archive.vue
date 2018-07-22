@@ -28,6 +28,7 @@ export default {
   },
   created () {
     this.get_archive()
+    document.title = '归档 - 何人也的博客'
   },
   methods: {
     get_archive () {

@@ -4,10 +4,14 @@
     <b-card :key="article.id">
       <b>{{ article.title }}</b>
       <hr>
-      <p class="card-text">{{ article.content }}</p>
+      <p class="card-text">{{ article.desc }}</p>
       <router-link :to="{name:'detail', params: { id: article.id }}" class="url">阅读全文</router-link>
       <hr>
       <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
+      <span class="text-muted">
+      <i class="fa fa-eye"> {{article.view}}</i> /
+      <i class="fa fa-comments"> {{article.comments.length}}</i>
+      </span>
     </b-card>
     <br>
     </template>
@@ -39,14 +43,15 @@ export default {
   },
   methods: {
     get_list () {
-      if (this.$route.params.id) {
+      if (this.$route.params.name) {
         getlist({
           page: this.currentPage,
-          category__id: this.$route.params.id
+          category__name: this.$route.params.name
         }).then((response) => {
           this.list = response.data.results
           this.totalrows = response.data.count
         })
+        document.title = this.$route.params.name + ' - 何人也的博客'
       } else {
         getlist({
           page: this.currentPage

@@ -26,7 +26,7 @@ class ArticleViewSet(ModelViewSet):
     queryset = Article.objects.all()
     pagination_class = ArticlePagination
     filter_backends = (DjangoFilterBackend,)
-    filter_fields = ('category__id',)
+    filter_fields = ('category__name',)
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

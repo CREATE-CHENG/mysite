@@ -18,6 +18,5 @@ class Comment(models.Model):
         verbose_name_plural = verbose_name
 
 
-# todo image的模型
 class Image(models.Model):
     image = models.ImageField(upload_to='image/')

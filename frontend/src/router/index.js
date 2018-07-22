@@ -35,7 +35,7 @@ export default new Router({
           }
         },
         {
-          path: 'category/:id',
+          path: 'category/:name',
           name: 'category',
           components: {
             'section': list

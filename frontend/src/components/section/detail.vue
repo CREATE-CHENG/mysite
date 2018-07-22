@@ -33,6 +33,7 @@ export default {
       getarticle(this.article_id)
         .then((response) => {
           this.article = response.data
+          document.title = response.data.title + ' - 何人也的博客'
         })
     }
   }
