@@ -1,17 +1,16 @@
 <template>
-<div>
+  <div>
     <navbar></navbar>
-    <br>
-    <b-container>
-        <b-row>
-            <router-view name="section"></router-view>
-            <asides></asides>
-        </b-row>
+    <b-container id="container">
+      <b-row>
+        <router-view name="section"></router-view>
+        <asides></asides>
+      </b-row>
     </b-container>
-    <footer class="bs-docs-footer fixed-bottom">
+    <footer class="bs-footer fixed-bottom">
       <div class="container">© 2018 何人也的博客</div>
     </footer>
-</div>
+  </div>
 </template>
 
 <script>
@@ -59,12 +58,16 @@ export default {
 }
 </script>
 <style>
-.bs-docs-footer {
+.bs-footer {
     padding-top: 20px;
     padding-bottom: 10px;
     margin-top: 20px;
     color: #99979c;
     text-align: left;
     background-color: #ffffff;
+}
+#container{
+    padding-bottom: 60px;
+    padding-top: 40px;
 }
 </style>

@@ -10,9 +10,6 @@ import VueTimeago from 'vue-timeago'
 import store from './store/store'
 import './axios/interceptors'
 import VueCookies from 'vue-cookies'
-// import mavonEditor from 'mavon-editor'
-// import 'mavon-editor/dist/css/index.css'
-// import 'github-markdown-css/github-markdown.css'
 import 'font-awesome/css/font-awesome.css'
 
 Vue.use(VueCookies)
@@ -21,8 +18,6 @@ Vue.config.productionTip = false
 Vue.config.devtools = false
 
 Vue.use(BootstrapVue)
-
-// Vue.use(mavonEditor)
 
 Vue.use(VueTimeago, {
   name: 'Timeago', // Component name, `Timeago` by default

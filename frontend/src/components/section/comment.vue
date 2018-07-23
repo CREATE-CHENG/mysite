@@ -9,7 +9,7 @@
          <vue-markdown class="markdown-body">{{comment.content}}</vue-markdown>
          <p>
            <timeago :since="comment.created_time" locale="zh-CN" class="text-muted"></timeago>
-           <b-button variant="link" @click="reply(comment.id, comment.user.username)" class="text-muted">回复</b-button>
+           <b-button variant="link" @click="reply_to(comment.id, comment.user.username)" class="text-muted">回复</b-button>
          </p>
          <hr>
          <template v-for="child in comment.children">
@@ -19,7 +19,7 @@
            <vue-markdown class="markdown-body">{{child.content}}</vue-markdown>
            <p>
              <timeago :since="child.created_time" locale="zh-CN" class="text-muted"></timeago>
-             <b-button variant="link" @click="reply(comment.id)" class="text-muted">回复</b-button>
+             <b-button variant="link" @click="reply_to(comment.id, child.user.username)" class="text-muted">回复</b-button>
            </p>
          </b-media>
          <hr>
@@ -28,10 +28,10 @@
      </b-card>
    </template>
      <b-form @submit="onSubmit" @reset="onReset" v-show="this.user.token">
-      <mavon-editor @imgAdd="$imgAdd" ref=md v-model="value" :placeholder="placeholder" :editable="editable"></mavon-editor>
+      <mavon-editor @imgAdd="$imgAdd" ref=md v-model="value" :placeholder="placeholder" :editable="set_editable"></mavon-editor>
       <br>
       <b-button type="submit" variant="default">发表评论</b-button>
-      <b-button type="reset" variant="default">重置</b-button>
+      <b-button type="reset" variant="default" v-if="set_editable">重置</b-button>
     </b-form>
   </b-card>
   <br>
@@ -48,7 +48,7 @@ export default {
   data () {
     return {
       value: '',
-      placeholder: '请输入评论内容',
+      placeholder: '请输入评论内容。',
       pid: null,
       editable: true
     }
@@ -60,10 +60,16 @@ export default {
   computed: {
     ...mapGetters({
       user: 'user'
-    })
-  },
-  created () {
-    this.editable = this.set_editable()
+    }),
+    set_editable: function () {
+      if (this.user.token) {
+        this.placeholder = '请输入评论内容。'
+        return true
+      } else {
+        this.placeholder = '看到也没用，登录后才能使用！'
+        return false
+      }
+    }
   },
   props: ['comments', 'article_id'],
   methods: {
@@ -92,39 +98,31 @@ export default {
           addcomment(formdata)
         } else {
           evt.preventDefault()
-          alert('请输入评论内容')
+          alert('请输入评论内容。')
           this.$refs.md.textAreaFocus()
         }
       } else {
         alert('请登录！')
+        evt.preventDefault()
       }
     },
     onReset () {
       this.value = ''
-      this.placeholder = '请输入评论内容!'
+      this.placeholder = '请输入评论内容。'
       this.pid = null
     },
-    reply (pid, username) {
+    reply_to (pid, username) {
       if (this.user.token) {
         this.$refs.md.textAreaFocus()
         this.placeholder = '回复' + username
         this.value = '++@' + username + '++ '
         this.pid = pid
-        console.log(pid)
       } else {
-        alert('请登录！')
+        alert('登录后方可回复。')
       }
     },
     markdown (content) {
       return this.$refs.md.markdownIt.render(content)
-    },
-    set_editable () {
-      if (this.user.token) {
-        return true
-      } else {
-        this.placeholder = '看到也没用，登录后才能使用！'
-        return false
-      }
     }
   }
 }

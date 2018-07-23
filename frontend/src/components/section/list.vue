@@ -9,8 +9,8 @@
       <hr>
       <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
       <span class="text-muted pull-right">
-      <i class="fa fa-eye"> {{article.view}}</i>
-      <i class="fa fa-comments"> {{article.comments.length}}</i>
+        <i class="fa fa-eye"> {{article.view}}</i>
+        <i class="fa fa-comments"> {{article.comments.length}}</i>
       </span>
     </b-card>
     <br>
