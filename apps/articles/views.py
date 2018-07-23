@@ -2,10 +2,12 @@ from operator import itemgetter
 from itertools import groupby
 
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import ListModelMixin, CreateModelMixin
+from rest_framework.mixins import ListModelMixin
 from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 from django_filters.rest_framework import DjangoFilterBackend
 
@@ -23,6 +25,7 @@ class ArticlePagination(PageNumberPagination):
 
 class ArticleViewSet(ModelViewSet):
     serializer_class = ArticleSerializer
+    authentication_classes = (JSONWebTokenAuthentication,)
     queryset = Article.objects.all()
     pagination_class = ArticlePagination
     filter_backends = (DjangoFilterBackend,)
@@ -52,19 +55,8 @@ class ArticleViewSet(ModelViewSet):
         return Response(serializer)
 
 
-class CategoryViewSet(ListModelMixin, CreateModelMixin, GenericViewSet):
+class CategoryViewSet(ListModelMixin, GenericViewSet):
     serializer_class = CategorySerializer
-    queryset = Category.objects.all()
-
-    def get_permissions(self):
-        if self.action == 'create':
-            return [IsAdminUser()]
-        else:
-            return []
-
-
-class CategoryWithArticleViewSet(ListModelMixin, GenericViewSet):
-    serializer_class = CategoryWithArticleSerializer
     queryset = Category.objects.all()
 
 

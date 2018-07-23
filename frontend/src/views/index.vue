@@ -41,8 +41,6 @@ export default {
               sessionStorage.setItem('user', response.data.user.username)
               sessionStorage.setItem('avatar', response.data.user.social_auth.extra_data.profile_image_url)
               this.$store.dispatch('setuser')
-            }).catch((error) => {
-              return error
             })
         }
       }
@@ -58,4 +56,3 @@ export default {
 }
 
 </script>
-# todo 登录失效验证，getjwt返回的的error里处理该问题，以及其他错误处理

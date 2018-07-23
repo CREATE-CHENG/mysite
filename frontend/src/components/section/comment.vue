@@ -108,6 +108,7 @@ export default {
       if (this.user.token) {
         this.$refs.md.textAreaFocus()
         this.placeholder = '回复' + username
+        this.value = '++@' + username + '++ '
         this.pid = pid
         console.log(pid)
       } else {

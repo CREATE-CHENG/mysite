@@ -4,6 +4,7 @@ import index from '@/views/index'
 import list from '@/components/section/list'
 import detail from '@/components/section/detail'
 import archive from '@/components/section/archive'
+import nothing from '@/components/section/nothing'
 
 Vue.use(Router)
 
@@ -19,9 +20,6 @@ export default new Router({
           name: 'index',
           components: {
             'section': list
-          },
-          meta: {
-            title: '首页'
           }
         },
         {
@@ -29,9 +27,6 @@ export default new Router({
           name: 'detail',
           components: {
             'section': detail
-          },
-          meta: {
-            title: '文章'
           }
         },
         {
@@ -39,9 +34,6 @@ export default new Router({
           name: 'category',
           components: {
             'section': list
-          },
-          meta: {
-            title: '分类'
           }
         },
         {
@@ -49,9 +41,13 @@ export default new Router({
           name: 'archive',
           components: {
             'section': archive
-          },
-          meta: {
-            title: '归档'
+          }
+        },
+        {
+          path: '*',
+          name: '404',
+          components: {
+            'section': nothing
           }
         }
       ]

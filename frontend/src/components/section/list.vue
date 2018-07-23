@@ -48,8 +48,13 @@ export default {
           page: this.currentPage,
           category__name: this.$route.params.name
         }).then((response) => {
-          this.list = response.data.results
-          this.totalrows = response.data.count
+          var count = response.data.count
+          if (count !== 0) {
+            this.list = response.data.results
+            this.totalrows = response.data.count
+          } else {
+            this.$router.push({ name: '404' })
+          }
         })
         document.title = this.$route.params.name + ' - 何人也的博客'
       } else {

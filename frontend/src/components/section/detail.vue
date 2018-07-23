@@ -35,6 +35,10 @@ export default {
           this.article = response.data
           document.title = response.data.title + ' - 何人也的博客'
         })
+        .catch((error) => {
+          console.log(error.response.status)
+          this.$router.push({ name: '404' })
+        })
     }
   }
 }
