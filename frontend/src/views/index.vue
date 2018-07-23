@@ -8,6 +8,9 @@
             <asides></asides>
         </b-row>
     </b-container>
+    <footer class="bs-docs-footer fixed-bottom">
+      <div class="container">© 2018 何人也的博客</div>
+    </footer>
 </div>
 </template>
 
@@ -54,5 +57,14 @@ export default {
     }
   }
 }
-
 </script>
+<style>
+.bs-docs-footer {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    color: #99979c;
+    text-align: left;
+    background-color: #ffffff;
+}
+</style>
