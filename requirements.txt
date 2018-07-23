@@ -1,0 +1,9 @@
+Django==2.0.6
+django-cors-headers==2.3.0
+django-filter==1.1.0
+djangorestframework==3.8.2
+djangorestframework-jwt==1.11.0
+Markdown==2.6.11
+Pillow==5.2.0
+social-auth-app-django==2.1.0
+social-auth-core==1.7.0
