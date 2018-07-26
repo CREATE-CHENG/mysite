@@ -5,21 +5,21 @@
      <b-card>
        <b-media>
          <b-img slot="aside" width="50" alt="avatar" :src="comment.user.social_auth.extra_data.profile_image_url" />
-         <h6 class="mt-0">{{comment.user.username}}</h6>
+         <h6 class="mt-0">{{comment.user.first_name}}</h6>
          <vue-markdown class="markdown-body">{{comment.content}}</vue-markdown>
          <p>
            <timeago :since="comment.created_time" locale="zh-CN" class="text-muted"></timeago>
-           <b-button variant="link" @click="reply_to(comment.id, comment.user.username)" class="text-muted">回复</b-button>
+           <b-button variant="link" @click="reply_to(comment.id, comment.user.first_name)" class="text-muted">回复</b-button>
          </p>
          <hr>
          <template v-for="child in comment.children">
          <b-media>
          <b-img slot="aside" width="50" alt="placeholder" :src="child.user.social_auth.extra_data.profile_image_url"/>
-           <h6 class="mt-0">{{child.user.username}}</h6>
+           <h6 class="mt-0">{{child.user.first_name}}</h6>
            <vue-markdown class="markdown-body">{{child.content}}</vue-markdown>
            <p>
              <timeago :since="child.created_time" locale="zh-CN" class="text-muted"></timeago>
-             <b-button variant="link" @click="reply_to(comment.id, child.user.username)" class="text-muted">回复</b-button>
+             <b-button variant="link" @click="reply_to(comment.id, child.user.first_name)" class="text-muted">回复</b-button>
            </p>
          </b-media>
          <hr>

@@ -40,7 +40,7 @@ export default {
           getjwt(
             ).then((response) => {
               sessionStorage.setItem('token', response.data.token)
-              sessionStorage.setItem('user', response.data.user.username)
+              sessionStorage.setItem('user', response.data.user.first_name)
               sessionStorage.setItem('avatar', response.data.user.social_auth.extra_data.profile_image_url)
               this.$store.dispatch('setuser')
             })

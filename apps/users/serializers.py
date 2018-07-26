@@ -19,4 +19,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('social_auth', 'username')
+        fields = ('social_auth', 'first_name')
