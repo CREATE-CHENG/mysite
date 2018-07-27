@@ -25,7 +25,7 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        fields = '__all__'
+        exclude = ('content',)
 
 
 class ArticleArchiveSerializer(serializers.ModelSerializer):
@@ -43,7 +43,7 @@ class ArticleForCategorySerializer(serializers.ModelSerializer):
         fields = ('id', 'title')
 
 
-class CategorySerializer(serializers.ModelSerializer):
+class CategoryListSerializer(serializers.ModelSerializer):
     articles = ArticleForCategorySerializer(many=True)
 
     class Meta:
@@ -51,9 +51,9 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class CategoryWithArticleSerializer(serializers.ModelSerializer):
-    articles = ArticleSerializer(many=True)
+class CategorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Category
         fields = '__all__'
+

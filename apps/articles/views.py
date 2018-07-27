@@ -2,7 +2,7 @@ from operator import itemgetter
 from itertools import groupby
 
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import ListModelMixin
+from rest_framework.mixins import ListModelMixin, CreateModelMixin, UpdateModelMixin
 from rest_framework.permissions import IsAdminUser
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -55,9 +55,22 @@ class ArticleViewSet(ModelViewSet):
         return Response(serializer)
 
 
-class CategoryViewSet(ListModelMixin, GenericViewSet):
+class CategoryViewSet(ListModelMixin, CreateModelMixin, UpdateModelMixin, GenericViewSet):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
+    authentication_classes = (JSONWebTokenAuthentication,)
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return CategoryListSerializer
+        else:
+            return CategorySerializer
+
+    def get_permissions(self):
+        if self.action in ['create', 'update']:
+            return [IsAdminUser()]
+        else:
+            return []
 
 
 class ArchiveViewSet(ListModelMixin, GenericViewSet):

@@ -84,8 +84,7 @@ export default {
         var content = this.markdown(this.value)
         formdata.append('title', this.title)
         formdata.append('desc', this.desc)
-        formdata.append('markdown_content', content)
-        formdata.append('content', this.value)
+        formdata.append('content', content)
         formdata.append('category', this.selected)
         addarticle(formdata)
         .then((response) => {

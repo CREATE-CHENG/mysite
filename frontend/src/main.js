@@ -15,7 +15,7 @@ import 'font-awesome/css/font-awesome.css'
 Vue.use(VueCookies)
 
 Vue.config.productionTip = false
-Vue.config.devtools = false
+Vue.config.devtools = true
 
 Vue.use(BootstrapVue)
 
