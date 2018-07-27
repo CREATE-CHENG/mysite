@@ -7,14 +7,13 @@
         <asides></asides>
       </b-row>
     </b-container>
-    <footer class="bs-footer fixed-bottom">
-      <div class="container">© 2018 何人也的博客</div>
-    </footer>
+    <foot></foot>
   </div>
 </template>
 
 <script>
 import navbar from '../components/head/navbar'
+import foot from '../components/foot/foot'
 import aside from '../components/aside/aside'
 import { getjwt } from '../api/api'
 import { mapGetters } from 'vuex'
@@ -22,7 +21,8 @@ import { mapGetters } from 'vuex'
 export default {
   components: {
     'navbar': navbar,
-    'asides': aside
+    'asides': aside,
+    'foot': foot
   },
   computed: {
     ...mapGetters({
@@ -43,6 +43,9 @@ export default {
               sessionStorage.setItem('user', response.data.user.first_name)
               sessionStorage.setItem('avatar', response.data.user.social_auth.extra_data.profile_image_url)
               this.$store.dispatch('setuser')
+              if (response.data.permission) {
+                this.$store.dispatch('setpermission')
+              }
             })
         }
       }

@@ -11,7 +11,10 @@ class SocialUserSerializer(serializers.ModelSerializer):
         fields = ('extra_data',)
 
     def get_extra_data(self, cls):
-        return {'profile_image_url': cls.first().extra_data['profile_image_url']}
+        if cls.first():
+            return {'profile_image_url': cls.first().extra_data['profile_image_url']}
+        else:
+            return {'profile_image_url': ''}
 
 
 class UserSerializer(serializers.ModelSerializer):

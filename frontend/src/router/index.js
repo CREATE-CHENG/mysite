@@ -5,12 +5,18 @@ import list from '@/components/section/list'
 import detail from '@/components/section/detail'
 import archive from '@/components/section/archive'
 import nothing from '@/components/section/nothing'
+import addnew from '@/views/new'
 
 Vue.use(Router)
 
 export default new Router({
   mode: 'history',
   routes: [
+    {
+      path: '/new',
+      name: 'new',
+      component: addnew
+    },
     {
       path: '/',
       component: index,

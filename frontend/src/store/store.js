@@ -8,18 +8,25 @@ const state = {
     username: sessionStorage.getItem('user'),
     token: sessionStorage.getItem('token'),
     avatar: sessionStorage.getItem('avatar')
-  }
+  },
+  permission: 0
 }
 
 const getters = {
   user: state => {
     return state.user
+  },
+  permission: state => {
+    return state.permission
   }
 }
 
 const actions = {
   setuser ({ commit }) {
     commit('setuser')
+  },
+  setpermission ({ commit, permission }) {
+    commit('setpermission', permission)
   }
 }
 
@@ -30,6 +37,9 @@ const mutations = {
       token: sessionStorage.getItem('token'),
       avatar: sessionStorage.getItem('avatar')
     }
+  },
+  setpermission (state, permission) {
+    state.permission = permission
   }
 }
 

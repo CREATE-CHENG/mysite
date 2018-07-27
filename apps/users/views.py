@@ -15,6 +15,7 @@ class SocialToJwtView(APIView):
 
         payload = jwt_payload_handler(request.user)
         token = jwt_encode_handler(payload)
-        response_data = jwt_response_payload_handler(token, request.user)
+        permission = 1 if request.user.is_superuser else 0
+        response_data = jwt_response_payload_handler(token, request.user, permission)
         return Response(response_data)
 
