@@ -36,7 +36,7 @@ export default new Router({
         },
         {
           path: 'article/:id',
-          name: 'detail',
+          name: 'article',
           components: {
             'section': detail
           }

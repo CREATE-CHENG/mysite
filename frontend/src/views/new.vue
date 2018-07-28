@@ -104,7 +104,7 @@ export default {
       return this.$refs.md.markdownIt.render(content)
     },
     check_permission () {
-      if (this.permission === 1) {
+      if (this.permission === 0) {
       } else {
         this.$router.push({ name: '404' })
       }

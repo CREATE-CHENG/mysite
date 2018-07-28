@@ -34,6 +34,7 @@
 import navbar from '../components/head/navbar'
 import foot from '../components/foot/foot'
 import {getcategories} from '@/api/api'
+import { mapGetters } from 'vuex'
 
 export default {
   data () {
@@ -41,15 +42,33 @@ export default {
       categories: []
     }
   },
+  computed: {
+    ...mapGetters({
+      permission: 'permission'
+    })
+  },
   components: {
     'navbar': navbar,
     'foot': foot
+  },
+  beforeCreate () {
+    this.$nextTick(function () {
+      this.check_permission()
+    })
   },
   created () {
     getcategories(
     ).then((response) => {
       this.categories = response.data
     })
+  },
+  methods: {
+    check_permission () {
+      if (this.permission) {
+      } else {
+        this.$router.push({ name: '404' })
+      }
+    }
   }
 }
 </script>

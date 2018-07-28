@@ -6,7 +6,9 @@
         <template v-for="(articles, date) in list">
           <b-card :header="date" no-body>
             <b-list-group flush>
-              <b-list-group-item :href="/article/ + article.id" :key="article.id" v-for="article in articles">{{ article.title }}</b-list-group-item>
+              <b-list-group-item :key="article.id" v-for="article in articles">
+                <router-link :to="{name:'article', params: { id: article.id }}" class="url">{{ article.title }}</router-link>
+              </b-list-group-item>
             </b-list-group>
           </b-card>
           <br>

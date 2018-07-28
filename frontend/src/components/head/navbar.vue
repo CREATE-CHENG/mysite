@@ -8,13 +8,16 @@
   <b-collapse is-nav id="nav_collapse">
 
     <b-navbar-nav>
-      <b-nav-item href="/">首页</b-nav-item>
-      <b-nav-item href="/archive">归档</b-nav-item>
+      <router-link :to="{name:'index'}" class="nav-link">首页</router-link>
+      <router-link :to="{name:'archive'}" class="nav-link">归档</router-link>
     </b-navbar-nav>
     <!-- Right aligned nav items -->
     <b-navbar-nav class="ml-auto">
       <b-nav-item-dropdown :text="this.user.username" right v-if="this.user.username">
-        <b-dropdown-item @click="logout">登出</b-dropdown-item>
+        <b-dropdown-item v-if="this.permission">
+          <router-link :to="{name:'manage'}" class="url">管理</router-link>
+        </b-dropdown-item>
+        <b-dropdown-item @click="logout" class="url">登出</b-dropdown-item>
       </b-nav-item-dropdown>
       <b-nav-item href="http://127.0.0.1:8000/login/weibo/" v-else @click="set_redirect_url">登录</b-nav-item>
     </b-navbar-nav>
@@ -31,7 +34,8 @@ import { mapGetters } from 'vuex'
 export default {
   computed: {
     ...mapGetters({
-      user: 'user'
+      user: 'user',
+      permission: 'permission'
     })
   },
   methods: {
@@ -41,6 +45,7 @@ export default {
     logout () {
       sessionStorage.clear()
       this.$store.dispatch('setuser')
+      this.$store.dispatch('setpermission', 0)
       this.$cookies.remove('csrftoken')
       logout()
     }

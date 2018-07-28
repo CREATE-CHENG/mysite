@@ -25,7 +25,7 @@ const actions = {
   setuser ({ commit }) {
     commit('setuser')
   },
-  setpermission ({ commit, permission }) {
+  setpermission ({ commit }, permission) {
     commit('setpermission', permission)
   }
 }

@@ -44,7 +44,7 @@ export default {
               sessionStorage.setItem('avatar', response.data.user.social_auth.extra_data.profile_image_url)
               this.$store.dispatch('setuser')
               if (response.data.permission) {
-                this.$store.dispatch('setpermission')
+                this.$store.dispatch('setpermission', response.data.permission)
               }
             })
         }

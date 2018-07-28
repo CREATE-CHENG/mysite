@@ -28,7 +28,7 @@ router = DefaultRouter()
 router.register(r'articles', ArticleViewSet, base_name='articles')
 router.register(r'categories', CategoryViewSet, base_name='categories')
 router.register(r'archive', ArchiveViewSet, base_name='archive')
-router.register(r'image_upload', ImageUploadViewSet, base_name='image')
+router.register(r'images', ImageUploadViewSet, base_name='image')
 router.register(r'comments', CommentViewSet, base_name='comments')
 
 urlpatterns = [

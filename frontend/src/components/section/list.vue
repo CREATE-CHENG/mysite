@@ -5,7 +5,7 @@
       <b>{{ article.title }}</b>
       <hr>
       <p class="card-text">{{ article.desc }}</p>
-      <router-link :to="{name:'detail', params: { id: article.id }}" class="url">阅读全文</router-link>
+      <router-link :to="{name:'article', params: { id: article.id }}" class="url">阅读全文</router-link>
       <hr>
       <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
       <span class="text-muted pull-right">
