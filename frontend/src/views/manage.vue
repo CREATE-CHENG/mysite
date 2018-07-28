@@ -6,7 +6,7 @@
           <b-list-group>
           <b-card>
             <span class="text-muted pull-left">
-              <b-button variant="link" @click="" class="text-muted">添加文章</b-button>
+              <b-button variant="link" @click="toadd" class="text-muted">添加文章</b-button>
               <b-button variant="link" @click="" class="text-muted">添加分类</b-button>
             </span>
           </b-card>
@@ -61,6 +61,7 @@ export default {
     ).then((response) => {
       this.categories = response.data
     })
+    document.title = '管理 - 何人也的博客'
   },
   methods: {
     check_permission () {
@@ -68,9 +69,13 @@ export default {
       } else {
         this.$router.push({ name: '404' })
       }
+    },
+    toadd () {
+      this.$router.push({name: 'new'})
     }
   }
 }
+// todo 文章管理，分类修改功能
 </script>
 
 <style>
@@ -78,17 +83,8 @@ export default {
     padding-bottom: 60px;
     padding-top: 40px;
 }
-.bs-footer {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    color: #99979c;
-    text-align: left;
-    background-color: #ffffff;
-}
 .my-card {
     padding-bottom: 10px;
     margin-top: 20px;
 }
 </style>
-

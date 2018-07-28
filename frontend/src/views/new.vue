@@ -2,7 +2,7 @@
 <div>
   <navbar></navbar>
   <b-container id="container">
-    <b-form @submit="onSubmit">
+    <b-form @submit="onSubmit" @reset="onReset">
       <b-form-group label="标题：">
         <b-form-input type="text" v-model="title" required placeholder="输入标题">
         </b-form-input>
@@ -20,6 +20,7 @@
       <mavon-editor @imgAdd="$imgAdd" v-model="value" ref=md></mavon-editor>
       <br>
       <b-button type="submit" variant="default">发布新文章</b-button>
+      <b-button type="reset" variant="default">返回</b-button>
     </b-form>
   </b-container>
   <foot></foot>
@@ -64,12 +65,13 @@ export default {
     ).then((response) => {
       this.categories = response.data
     })
+    document.title = '添加文章 - 何人也的博客'
   },
   methods: {
     // 绑定@imgAdd event
     $imgAdd (pos, $file) {
         // 第一步.将图片上传到服务器.
-      var formdata = new FormData()
+      const formdata = new FormData()
       formdata.append('image', $file)
       imageupload(formdata)
       .then((response) => {
@@ -80,15 +82,22 @@ export default {
     },
     onSubmit (evt) {
       if (this.value) {
-        var formdata = new FormData()
-        var content = this.markdown(this.value)
-        formdata.append('title', this.title)
-        formdata.append('desc', this.desc)
-        formdata.append('markdown_content', content)
-        formdata.append('content', this.value)
-        formdata.append('category', this.selected)
-        addarticle(formdata)
+        const formData = new FormData()
+        const markContent = this.markdown(this.value)
+        formData.append('title', this.title)
+        formData.append('desc', this.desc)
+        formData.append('markdown_content', markContent)
+        formData.append('content', this.value)
+        if (this.selected) {
+          formData.append('category', this.selected)
+        } else {
+          evt.preventDefault()
+          alert('请选择分类！')
+          return
+        }
+        addarticle(formData)
         .then((response) => {
+          this.$router.push({name: 'article', params: { id: response.data.id }})
         })
         .catch((error) => {
           console.log(error.response.status)
@@ -100,11 +109,14 @@ export default {
       }
       evt.preventDefault()
     },
+    onReset () {
+      this.$router.go(-1)
+    },
     markdown (content) {
       return this.$refs.md.markdownIt.render(content)
     },
     check_permission () {
-      if (this.permission === 0) {
+      if (this.permission === 1) {
       } else {
         this.$router.push({ name: '404' })
       }
@@ -116,14 +128,6 @@ export default {
 #container{
     padding-bottom: 60px;
     padding-top: 40px;
-}
-.bs-footer {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    color: #99979c;
-    text-align: left;
-    background-color: #ffffff;
 }
 </style>
 

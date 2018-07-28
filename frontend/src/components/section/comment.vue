@@ -76,7 +76,7 @@ export default {
     // 绑定@imgAdd event
     $imgAdd (pos, $file) {
         // 第一步.将图片上传到服务器.
-      var formdata = new FormData()
+      const formdata = new FormData()
       formdata.append('image', $file)
       imageupload(formdata)
       .then((response) => {

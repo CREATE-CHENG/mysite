@@ -65,6 +65,7 @@ export default {
           this.list = response.data.results
           this.totalrows = response.data.count
         })
+        document.title = '何人也的博客'
       }
     }
   }

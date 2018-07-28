@@ -18,4 +18,12 @@ body {background-image: url(assets/background1.jpg);
 a.url {
 color: #888888;
 }
+.bs-footer {
+    padding-top: 20px;
+    padding-bottom: 10px;
+    margin-top: 20px;
+    color: #99979c;
+    text-align: left;
+    background-color: #ffffff;
+}
 </style>

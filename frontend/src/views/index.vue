@@ -61,14 +61,6 @@ export default {
 }
 </script>
 <style>
-.bs-footer {
-    padding-top: 20px;
-    padding-bottom: 10px;
-    margin-top: 20px;
-    color: #99979c;
-    text-align: left;
-    background-color: #ffffff;
-}
 #container{
     padding-bottom: 60px;
     padding-top: 40px;

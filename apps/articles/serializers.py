@@ -16,7 +16,7 @@ class ArticleCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        exclude = ('id', 'created_time', 'view')
+        exclude = ('created_time', 'view')
 
 
 class ArticleRetrieveSerializer(serializers.ModelSerializer):
