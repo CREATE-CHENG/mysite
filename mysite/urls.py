@@ -19,9 +19,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import TemplateView
 from rest_framework.routers import DefaultRouter
-from rest_framework_jwt.views import obtain_jwt_token
 from articles.views import ArticleViewSet, CategoryViewSet, ArchiveViewSet
-from users.views import SocialToJwtView
+from users.views import SocialToJwtView, CheckPermissionView
 from comments.views import ImageUploadViewSet, CommentViewSet
 
 router = DefaultRouter()
@@ -35,7 +34,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('jwt_auth/', obtain_jwt_token),
+    path('check_permission/', CheckPermissionView.as_view()),
     path('social_to_jwt/', SocialToJwtView.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('', TemplateView.as_view(template_name='index.html'), name='index')

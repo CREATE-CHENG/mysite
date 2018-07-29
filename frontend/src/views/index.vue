@@ -42,10 +42,8 @@ export default {
               sessionStorage.setItem('token', response.data.token)
               sessionStorage.setItem('user', response.data.user.first_name)
               sessionStorage.setItem('avatar', response.data.user.social_auth.extra_data.profile_image_url)
+              sessionStorage.setItem('permission', response.data.permission)
               this.$store.dispatch('setuser')
-              if (response.data.permission) {
-                this.$store.dispatch('setpermission', response.data.permission)
-              }
             })
         }
       }

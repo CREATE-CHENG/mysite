@@ -3,7 +3,7 @@
     <b-card :header="article.title">
       <p class="card-text"><vue-markdown class="markdown-body">{{article.markdown_content}}</vue-markdown></p>
       <p class="card-text text-muted">
-        <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
+        <timeago :datetime="article.created_time" locale="zh-CN" class="text-muted"></timeago>
         <span class="text-muted pull-right">
           <i class="fa fa-eye"> {{article.view}}</i>
           <i class="fa fa-comments"> {{comments_count}}</i>
@@ -38,12 +38,12 @@ export default {
   methods: {
     get_article () {
       getarticle(this.article_id)
-        .then((response) => {
+        .then(response => {
           this.article = response.data
           this.comments_count = this.article.comments.length
           document.title = response.data.title + ' - 何人也的博客'
         })
-        .catch((error) => {
+        .catch(error => {
           console.log(error.response.status)
           this.$router.push({ name: '404' })
         })

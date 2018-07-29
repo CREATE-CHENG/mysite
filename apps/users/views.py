@@ -2,6 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework_jwt.settings import api_settings
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
 
 
 class SocialToJwtView(APIView):
@@ -19,3 +20,10 @@ class SocialToJwtView(APIView):
         response_data = jwt_response_payload_handler(token, request.user, permission)
         return Response(response_data)
 
+
+class CheckPermissionView(APIView):
+    permission_classes = (permissions.IsAdminUser,)
+    authentication_classes = (JSONWebTokenAuthentication,)
+
+    def get(self, request):
+        return Response()

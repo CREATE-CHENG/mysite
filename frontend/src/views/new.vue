@@ -32,7 +32,7 @@ import navbar from '../components/head/navbar'
 import foot from '../components/foot/foot'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import { imageupload, addarticle, getcategories } from '@/api/api'
+import { imageupload, addarticle, getcategories, checkpermission } from '@/api/api'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -47,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      permission: 'permission'
+      user: 'user'
     })
   },
   components: {
@@ -116,7 +116,14 @@ export default {
       return this.$refs.md.markdownIt.render(content)
     },
     check_permission () {
-      if (this.permission === 1) {
+      if (this.user.permission) {
+        checkpermission()
+          .then(response => {
+          }).catch(error => {
+            console.log(error.state)
+            this.$router.push({ name: '404' })
+          }
+        )
       } else {
         this.$router.push({ name: '404' })
       }

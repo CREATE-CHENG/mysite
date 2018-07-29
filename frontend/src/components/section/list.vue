@@ -7,7 +7,7 @@
       <p class="card-text">{{ article.desc }}</p>
       <router-link :to="{name:'article', params: { id: article.id }}" class="url">阅读全文</router-link>
       <hr>
-      <timeago :since="article.created_time" locale="zh-CN" class="text-muted"></timeago>
+      <timeago :datetime="article.created_time" locale="zh-CN" class="text-muted"></timeago>
       <span class="text-muted pull-right">
         <i class="fa fa-eye"> {{article.view}}</i>
         <i class="fa fa-comments"> {{article.comments.length}}</i>
