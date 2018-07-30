@@ -34,8 +34,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('check_permission/', CheckPermissionView.as_view()),
-    path('social_to_jwt/', SocialToJwtView.as_view()),
+    path('api/check_permission/', CheckPermissionView.as_view()),
+    path('api/social_to_jwt/', SocialToJwtView.as_view()),
     path('', include('social_django.urls', namespace='social')),
     path('', TemplateView.as_view(template_name='index.html'), name='index')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
