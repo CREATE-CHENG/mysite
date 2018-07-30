@@ -25,7 +25,7 @@ class ArticleRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
-        exclude = ('content',)
+        fields = '__all__'
 
 
 class ArticleArchiveSerializer(serializers.ModelSerializer):

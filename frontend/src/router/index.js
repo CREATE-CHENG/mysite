@@ -5,7 +5,7 @@ import list from '@/components/section/list'
 import detail from '@/components/section/detail'
 import archive from '@/components/section/archive'
 import nothing from '@/components/section/nothing'
-import addnew from '@/views/new'
+import edit from '@/views/edit'
 import manage from '@/views/manage'
 
 Vue.use(Router)
@@ -16,12 +16,17 @@ export default new Router({
     {
       path: '/new',
       name: 'new',
-      component: addnew
+      component: edit
     },
     {
       path: '/manage',
       name: 'manage',
       component: manage
+    },
+    {
+      path: '/update/:id',
+      name: 'update',
+      component: edit
     },
     {
       path: '/',

@@ -19,7 +19,7 @@
       </b-form-group>
       <mavon-editor @imgAdd="$imgAdd" v-model="value" ref=md></mavon-editor>
       <br>
-      <b-button type="submit" variant="default">发布新文章</b-button>
+      <b-button type="submit" variant="default">发布文章</b-button>
       <b-button type="reset" variant="default">返回</b-button>
     </b-form>
   </b-container>
@@ -32,7 +32,7 @@ import navbar from '../components/head/navbar'
 import foot from '../components/foot/foot'
 import { mavonEditor } from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
-import { imageupload, addarticle, getcategories, checkpermission } from '@/api/api'
+import { imageupload, addarticle, getcategories, checkpermission, getarticle, updatearticle } from '@/api/api'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -42,7 +42,8 @@ export default {
       value: '',
       desc: '',
       selected: null,
-      categories: []
+      categories: [],
+      id: this.$route.params.id
     }
   },
   computed: {
@@ -65,7 +66,22 @@ export default {
     ).then((response) => {
       this.categories = response.data
     })
-    document.title = '添加文章 - 何人也的博客'
+    if (this.id) {
+      document.title = '文章编辑 - 何人也的博客'
+      getarticle(this.id)
+        .then(response => {
+          const article = response.data
+          this.title = article.title
+          this.desc = article.desc
+          this.value = article.content
+          this.selected = article.category
+        }).catch(err => {
+          console.log(err)
+          this.$router.push({ name: '404' })
+        })
+    } else {
+      document.title = '添加文章 - 何人也的博客'
+    }
   },
   methods: {
     // 绑定@imgAdd event
@@ -95,13 +111,23 @@ export default {
           alert('请选择分类！')
           return
         }
-        addarticle(formData)
-        .then((response) => {
-          this.$router.push({name: 'article', params: { id: response.data.id }})
-        })
-        .catch((error) => {
-          console.log(error.response.status)
-        })
+        if (this.id) {
+          updatearticle(this.id, formData)
+          .then((response) => {
+            this.$router.push({name: 'article', params: { id: response.data.id }})
+          })
+          .catch((error) => {
+            console.log(error.response.status)
+          })
+        } else {
+          addarticle(formData)
+          .then((response) => {
+            this.$router.push({name: 'article', params: { id: response.data.id }})
+          })
+          .catch((error) => {
+            console.log(error.response.status)
+          })
+        }
       } else {
         evt.preventDefault()
         alert('请输入文章内容。')
@@ -120,7 +146,7 @@ export default {
         checkpermission()
           .then(response => {
           }).catch(error => {
-            console.log(error.state)
+            console.log(error)
             this.$router.push({ name: '404' })
           }
         )

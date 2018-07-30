@@ -15,3 +15,5 @@ export const imagedel = imageid => { return axios.delete(`${host}/api/images/${i
 export const addcomment = params => { return axios.post(`${host}/api/comments/`, params) }
 export const addarticle = params => { return axios.post(`${host}/api/articles/`, params) }
 export const addcat = params => { return axios.post(`${host}/api/categories/`, params) }
+export const updatecat = (id, params) => { return axios.patch(`${host}/api/categories/${id}/`, params) }
+export const updatearticle = (id, params) => { return axios.patch(`${host}/api/articles/${id}/`, params) }
